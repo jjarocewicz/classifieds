@@ -1,9 +1,3 @@
-body {
-    padding-top: 40px;
-    padding-bottom: 40px;
-    background-color: #ADABAB;
- }
- 
  .form-signin {
     max-width: 330px;
     padding: 15px;
@@ -48,7 +42,21 @@ body {
     border-color:#017572;
  }
  
- h2{
+ h3 {
     text-align: center;
-    color: #017572;
+ }
+
+ #logo {
+    width: auto;
+    margin: 0 auto;
+    height: 33%;
+ }
+
+ #login_fields{
+     margin-top: -40px;
+ }
+
+ #brand_logo {
+     width: 3%;
+     height: auto;
  }
