@@ -18,21 +18,21 @@
     <h4>Items for sale:</h4>
     <?php
         // Prod
-        // $servername = "108.179.220.92";
-        // $username = "dbljtwon_root";
-        // $password = "j6T2&^7eR7";
-        // $mydb = "dbljtwon_php";
+        $servername = "108.179.220.92";
+        $username = "dbljtwon_root";
+        $password = "j6T2&^7eR7";
+        $mydb = "dbljtwon_php";
 
-        // $mysqli = new mysqli($servername, $username, $password, $mydb);
+        $mysqli = new mysqli($servername, $username, $password, $mydb);
 
         // Local
-        $servername="127.0.0.1";
-        $port=3307;
-        $username="root";
-        $password="root";
-        $mydb="classifieds";
+        // $servername="127.0.0.1";
+        // $port=3307;
+        // $username="root";
+        // $password="root";
+        // $mydb="classifieds";
 
-        $mysqli = new mysqli($servername, $username, $password, $port, $mydb);
+        // $mysqli = new mysqli($servername, $username, $password, $port, $mydb);
 
         // Check connection
         if (mysqli_connect_error()) {
@@ -40,7 +40,7 @@
             exit();
         } 
 
-        if ($stmt = $mysqli->prepare("SELECT * FROM classifieds.products;")) {
+        if ($stmt = $mysqli->prepare("SELECT * FROM products;")) {
                 $stmt->execute();
                 $stmt->bind_result($id, $title, $description, $image, $category, $price, $sold);
                 while ($stmt->fetch()) {
@@ -51,11 +51,11 @@
                             </a>
                             </div>
                             <div class='media-body'>
-                            <h4 class='media-heading'>" . $title . "</h4>
+                            <h4 class='media-heading'><a href='#'>" . $title . "</a></h4>
                             <p>" . $description . "</p>
                             <em>" . $category . "</em>
                             <br />
-                            <p>" . $price . "</p>
+                            <p>$" . $price . ".00</p>
                             </div>
                         </div>";
                 }
