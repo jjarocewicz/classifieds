@@ -1,9 +1,9 @@
-/**
- * Created by PhpStorm.
- * User: kelly
- * Date: 9/23/2018
- * Time: 12:39 PM
- */
+//**
+// * Created by PhpStorm.
+// * User: kelly
+// * Date: 9/23/2018
+// * Time: 12:39 PM
+// */
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
@@ -19,19 +19,52 @@
 </html>
 
 <?php
-$servername = "108.179.220.92";
-$username = "dbljtwon_root";
-$password = "j6T2&^7eR7";
-$mydb = "dbljtwon_php";
 
-$mysqli = new mysqli($servername, $username, $password, $mydb);
+
+//else{
+//    echo "SUCCESS!!!";
+//}
+
+// create short variable names
+$title=$_POST['title'];
+$description=$_POST['description'];
+$image=$_POST['image'];
+$category=$_POST['category'];
+$price=$_POST['price'];
+
+if(!$title || !$description || !$image || !$category || !$price) {
+    echo "You have not entered all the required details.<br />"."Please go back and try again.";
+    exit;
+}
+
+if (!get_magic_quotes_gpc()) {
+    $title=addslashes($title);
+    $description=addslashes($description);
+    $image=addslashes($image);
+    $category=addslashes($category);
+    $price=addslashes($price);
+}
+
+    $host = 'koetze01.com';
+    $user = 'koetzeze_root';
+    $password = 'sesame';
+    $database = 'koetzeze_classifieds';
+
+    $link = mysqli_connect($host, $user, $password, $database);
 
 // Check connection
-if (mysqli_connect_error()) {
-    printf("Connection to the quote database failed, please try again: " . mysqli_connect_error());
-    exit();
-} 
-else{
-    echo "SUCCESS!!!";
-}
+    if($link === false){
+        die("ERROR: Could not connect to database. Please try again later.";
+    }
+
+    $query = "insert into $database values ('".$title."', '".$description."', '".$image."', '".$category."', '".$price."')";
+    $result=$link->query($query);
+
+    if ($result){
+        echo $link->affected_rows." Your item is listed.";
+    }else{
+        echo "An error has occurred. Your item is not listed";
+    }
+    $link->close();
+
 ?>
