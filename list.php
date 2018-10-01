@@ -59,7 +59,7 @@ if (!get_magic_quotes_gpc()) {
     exit();
     } 
 
-    $query = "insert into $database values ('".$title."', '".$description."', '".$image."', '".$category."', '".$price."')";
+    $query = "insert into $mydb values ('".$title."', '".$description."', '".$image."', '".$category."', '".$price."')";
     $result=$link->query($query);
 
     if ($result){
