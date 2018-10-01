@@ -47,7 +47,7 @@
                     echo "<div class='media'>
                             <div class='media-left'>
                             <a href='#'>
-                                <img class='media-object' src='" . $image . "alt='product for sale'>
+                                <img class='media-object' src='" . $image . "alt='product for sale' width='100px' height='100px'>
                             </a>
                             </div>
                             <div class='media-body'>
