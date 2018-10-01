@@ -1,3 +1,7 @@
+<?php
+  session_start();
+?>
+
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -8,7 +12,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#"><img src="images/unnamed.jpg" class="img-responsive" id="brand_logo"></a>
+      <a class="navbar-brand" href="index.php"><img src="images/unnamed.jpg" class="img-responsive" id="brand_logo"></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -19,9 +23,32 @@
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
-      <ul class="nav navbar-nav navbar-right">        
-        <li><a href="#">Your Account</a></li>
-        <li><a href="#">Logout</a></li>
+      <ul class="nav navbar-nav navbar-right">  
+        <li>
+        <?php
+          if (isset($_SESSION['username'])){
+              echo('<a href="new_listing.php">Create new item</a></li>');
+            } else {
+              echo('<a href="" class="disabled" style="cursor: not-allowed;">Create new item</a>');
+            }
+        ?></li>      
+        <li>
+        <?php
+          if (isset($_SESSION['username'])){
+            echo('<a href="account.php">Your Account</a>');
+          } else {
+            echo('<a href="" class="disabled" style="cursor: not-allowed;">Your Account</a>');
+          }
+        ?>        
+       </li>
+        <li>
+        <?php
+          if (isset($_SESSION['username'])){
+            echo('<a href="logout.php">Logout</a>');
+          } else {
+            echo('<a href="login.php">Login</a>');
+          }
+        ?></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

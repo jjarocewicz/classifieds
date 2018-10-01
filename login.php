@@ -42,22 +42,43 @@
       <div class = "container form-signin">
          
          <?php
-            $msg = '';
+            $servername = "108.179.220.92";
+            $username = "dbljtwon_root";
+            $password = "j6T2&^7eR7";
+            $mydb = "dbljtwon_php";
+    
+            $mysqli = new mysqli($servername, $username, $password, $mydb);
+    
+            if (mysqli_connect_error()) {
+                  printf("Connection to the quote database failed, please try again: " . mysqli_connect_error());
+                  exit();
+              } 
+      
+              if ($stmt = $mysqli->prepare("SELECT * FROM users;")) {
+                      $stmt->execute();
+                      $stmt->bind_result($id, $username, $password, $avatar, $email);
+                      while ($stmt->fetch()) {                               
+                        if (isset($_POST['login']) && !empty($_POST['username']) 
+                        && !empty($_POST['password'])) {
+                                    
+                              if ($_POST['username'] == $username && 
+                                    $_POST['password'] == $password) 
+                              {
+                                    $_SESSION['id'] = $id;
+                                    $_SESSION['username'] = $username;
+                                    $_SESSION['password'] = $password;
+                                    $_SESSION['avatar'] = $avatar;
+                                    $_SESSION['email'] = $email;
+                                    $_SESSION['valid'] = true;
+                                    $_SESSION['timeout'] = time();                                    
+                                    header('Location: index.php'); 
+                              } else {
+                                    echo('Wrong username or password');
+                              }
+                        }
+                      }
+                  }
             
-            if (isset($_POST['login']) && !empty($_POST['username']) 
-               && !empty($_POST['password'])) {
-				
-               if ($_POST['username'] == 'test' && 
-                  $_POST['password'] == '1234') {
-                  $_SESSION['valid'] = true;
-                  $_SESSION['timeout'] = time();
-                  $_SESSION['username'] = 'test';
-                  
-                  header('Location: index.php'); 
-               }else {
-                  $msg = 'Wrong username or password';
-               }
-            }
          ?>
       </div> <!-- /container -->
       

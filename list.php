@@ -19,11 +19,19 @@
 </html>
 
 <?php
-$link = mysqli_connect('koetze01.com', 'koetzeze_root', 'password123', 'koetzeze_classifieds');)
+$servername = "108.179.220.92";
+$username = "dbljtwon_root";
+$password = "j6T2&^7eR7";
+$mydb = "dbljtwon_php";
+
+$mysqli = new mysqli($servername, $username, $password, $mydb);
 
 // Check connection
-if($link === false){
-    die("ERROR: Could not connect. " . mysqli_connect_error());
-}
+if (mysqli_connect_error()) {
+    printf("Connection to the quote database failed, please try again: " . mysqli_connect_error());
+    exit();
+} 
 else{
     echo "SUCCESS!!!";
+}
+?>
