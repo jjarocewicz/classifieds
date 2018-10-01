@@ -45,17 +45,19 @@ if (!get_magic_quotes_gpc()) {
     $price=addslashes($price);
 }
 
-    $host = 'koetze01.com';
-    $user = 'koetzeze_root';
-    $password = 'sesame';
-    $database = 'koetzeze_classifieds';
+   $servername = "108.179.220.92";
+   $username = "dbljtwon_root";
+   $password = "j6T2&^7eR7";
+   $mydb = "dbljtwon_php";
 
-    $link = mysqli_connect($host, $user, $password, $database);
+   $mysqli = new mysqli($servername, $username, $password, $mydb);
+
 
 // Check connection
-    if($link === false){
-        die("ERROR: Could not connect to database. Please try again later.";
-    }
+    if (mysqli_connect_error()) {
+    printf("Connection to the quote database failed, please try again: " . mysqli_connect_error());
+    exit();
+    } 
 
     $query = "insert into $database values ('".$title."', '".$description."', '".$image."', '".$category."', '".$price."')";
     $result=$link->query($query);
