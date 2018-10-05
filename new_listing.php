@@ -16,9 +16,9 @@
 		<br>
         Price $ <input type="text" name="price"><br>
 		<br>
-        Select Image to Upload: <input type="file" name="image"><br>
+        <!--Select Image to Upload: <input type="file" name="image"><br>
 		<br>
-		<!--<input type="submit" value="Upload Image" name="submit"><br>-->
+		<input type="submit" value="Upload Image" name="submit"><br>-->
 		<br>
 		<input type="submit" value="Submit"><br>       
     </form>
