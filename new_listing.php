@@ -18,7 +18,7 @@
 		<br>
         Select Image to Upload: <input type="file" name="image"><br>
 		<br>
-		<input type="submit" value="Upload Image" name="submit"><br>
+		<!--<input type="submit" value="Upload Image" name="submit"><br>-->
 		<br>
 		<input type="submit" value="Submit"><br>       
     </form>
