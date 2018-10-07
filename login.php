@@ -33,9 +33,11 @@
                name = "password" required>
             <button class = "btn btn-lg btn-primary btn-block" type = "submit" 
                name = "login">Login</button>
+            <br />
+            <p>Click <a href="register.php">here</a> to register a new account.</p>
          </form>
 			
-         <!-- Click here to clean <a href = "logout.php" tite = "Logout">Session. -->
+         
          
       </div> 
 

@@ -27,6 +27,8 @@ $category=$_POST['category'];
 $price=$_POST['price'];
 
 if(!$title || !$description || !$image || !$category || !$price) {
+    // $fields = array($title, $description, $image, $category, $price);
+    // var_dump($fields);
     echo "You have not entered all the required details.<br />"."Please go back and try again.";
     exit;
 }

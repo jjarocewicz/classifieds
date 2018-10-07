@@ -17,13 +17,8 @@
 
 <div class="container">
 <?php
-        session_start();
-
-        $username_user = $_SESSION['username'];
-        $password_user = $_SESSION['password'];
-        $avatar = $_SESSION['avatar'];
-        $email = $_SESSION['email'];
-        $id = $_SESSION['id'];
+        ini_set('display_errors',1);
+        error_reporting(E_ALL);
         
         // Prod
         $servername = "108.179.220.92";
@@ -31,23 +26,23 @@
         $password = "j6T2&^7eR7";
         $mydb = "dbljtwon_php";
 
-        $mysqli = new mysqli($servername, $username, $password, $mydb);
+        $conn = mysqli_connect($servername, $username, $password, $mydb);
 
         // Check connection
-        if (mysqli_connect_error()) {
-            printf("Connection to the quote database failed, please try again: " . mysqli_connect_error());
+        if (! $conn ) {
+            printf("Connection to the quote database failed, please try again: " . mysqli_error());
             exit();
         } 
 
-        $sql = "UPDATE users SET loginName = $username_user, password = $password_user, avatar = $avatar, email = $email WHERE idUsers = $id";
-
-        if(mysqli_query($sql)){
+        $sql = "UPDATE users SET loginName = '".$_POST["username"]."', '".$_POST["password"]."', '".$_POST["avatar"]."', '".$_POST["email"]."'";
+        
+        if(mysqli_query($conn, $sql)){
             echo ('Your account has been updated.');
         } else {
-            echo ('There\'s been an error, please try updating your account again' . mysqli_error($mysqli));
+            echo ('There\'s been an error, please try updating your account again' . mysqli_error($conn));
         }
 
-        $mysqli->close();
+        mysqli_close($conn);
 ?>
 </div>
 </body>

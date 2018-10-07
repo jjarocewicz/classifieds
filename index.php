@@ -25,15 +25,6 @@
 
         $mysqli = new mysqli($servername, $username, $password, $mydb);
 
-        // Local
-        // $servername="127.0.0.1";
-        // $port=3307;
-        // $username="root";
-        // $password="root";
-        // $mydb="classifieds";
-
-        // $mysqli = new mysqli($servername, $username, $password, $port, $mydb);
-
         // Check connection
         if (mysqli_connect_error()) {
             printf("Connection to the quote database failed, please try again: " . mysqli_connect_error());

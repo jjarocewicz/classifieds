@@ -30,7 +30,7 @@
                 </tr>
                 <tr>
                     <td>Category</td>
-                    <td> <input type="text" name="Category" maxlength="30" size="30" class="form-control"></td>
+                    <td> <input type="text" name="category" maxlength="30" size="30" class="form-control"></td>
                 </tr>
                 <tr>
                     <td>Price $</td>
