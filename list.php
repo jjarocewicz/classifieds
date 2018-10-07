@@ -26,13 +26,7 @@ $description=$_POST['description'];
 $category=$_POST['category'];
 $price=$_POST['price'];
 
-<<<<<<< HEAD
-if(!$title || !$description || !$image || !$category || !$price) {
-    // $fields = array($title, $description, $image, $category, $price);
-    // var_dump($fields);
-=======
 if(!$title || !$description || !$category || !$price) {
->>>>>>> 5825b68e3a5c2a1313e325d18f34834e0445003a
     echo "You have not entered all the required details.<br />"."Please go back and try again.";
     exit;
 }
