@@ -22,13 +22,17 @@
 // create short variable names
 $title=$_POST['title'];
 $description=$_POST['description'];
-$image=$_POST['image'];
+// $image=$_POST['image'];
 $category=$_POST['category'];
 $price=$_POST['price'];
 
+<<<<<<< HEAD
 if(!$title || !$description || !$image || !$category || !$price) {
     // $fields = array($title, $description, $image, $category, $price);
     // var_dump($fields);
+=======
+if(!$title || !$description || !$category || !$price) {
+>>>>>>> 5825b68e3a5c2a1313e325d18f34834e0445003a
     echo "You have not entered all the required details.<br />"."Please go back and try again.";
     exit;
 }
@@ -36,7 +40,7 @@ if(!$title || !$description || !$image || !$category || !$price) {
 if (!get_magic_quotes_gpc()) {
     $title=addslashes($title);
     $description=addslashes($description);
-    $image=addslashes($image);
+    //$image=addslashes($image);
     $category=addslashes($category);
     $price=addslashes($price);
 }
@@ -55,7 +59,7 @@ if (!get_magic_quotes_gpc()) {
     exit();
     } 
 
-    $query = "insert into $mydb values ('".$title."', '".$description."', '".$image."', '".$category."', '".$price."')";
+    $query = "insert into $mydb values ('".$title."', '".$description."', '".$category."', '".$price."')";
     $result=$link->query($query);
 
     if ($result){
@@ -63,6 +67,11 @@ if (!get_magic_quotes_gpc()) {
     }else{
         echo "An error has occurred. Your item is not listed";
     }
+	
+	echo var_dump($title)."<br>";
+	echo var_dump($description)."<br>";
+	echo var_dump($category)."<br>";
+	echo var_dump($price)."<br>";
     $link->close();
 
 ?>

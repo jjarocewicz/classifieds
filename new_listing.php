@@ -1,23 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Classifieds Site - New Listing</title>
-    <link href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-    <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <title>Baker Classifieds - New Listing</title>
 </head>
-
 <body>
-    <?php
-        include "nav.php";
-    ?>
-    <div class="container">
-        <h1>Classifieds Site - New Item</h1>
+    <h1>Baker Classifieds - New Listing</h1>
 
+<<<<<<< HEAD
         <form action="list.php" method="post" enctype="multipart/form-data">
             <table border="0">
                 <tr>
@@ -47,6 +37,22 @@
             </table>
         </form>
     </div>
+=======
+    <form action="list.php" method="post" enctype="multipart/form-data">
+		Title: <input type="text" name="title"><br>
+		<br>
+        Description: <input type="text" name="description"><br>
+		<br>
+        Category: <input type="text" name="category"><br>
+		<br>
+        Price $ <input type="text" name="price"><br>
+		<br>
+        <!--Select Image to Upload: <input type="file" name="image"><br>
+		<br>
+		<input type="submit" value="Upload Image" name="submit"><br>-->
+		<br>
+		<input type="submit" value="Submit"><br>       
+    </form>
+>>>>>>> 5825b68e3a5c2a1313e325d18f34834e0445003a
 </body>
-
 </html>
