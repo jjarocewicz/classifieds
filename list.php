@@ -4,6 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
     <title>Baker Classifieds - List Item</title>
 </head>
 
