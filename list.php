@@ -36,12 +36,12 @@ if (!get_magic_quotes_gpc()) {
     $price=addslashes($price);
 }
 
-   $servername = "108.179.220.92";
-   $username = "dbljtwon_root";
-   $password = "j6T2&^7eR7";
-   $mydb = "dbljtwon_php";
+ //  $servername = "108.179.220.92";
+ //  $username = "dbljtwon_root";
+ //  $password = "j6T2&^7eR7";
+ //  $mydb = "dbljtwon_php";
 
-   $mysqli = new mysqli($servername, $username, $password, $mydb);
+  // $mysqli = new mysqli($servername, $username, $password, $mydb);
 
 
 // Check connection
