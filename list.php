@@ -14,7 +14,7 @@
 </html>
 
 <?php
-require_once('dbconnection.php'); 
+require_once('connection.php'); 
 
 // create short variable names
 $title=$_POST['title'];
