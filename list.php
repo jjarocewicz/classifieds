@@ -14,11 +14,7 @@
 </html>
 
 <?php
-
-
-//else{
-//    echo "SUCCESS!!!";
-//}
+require_once('dbconnection.php'); 
 
 // create short variable names
 $title=$_POST['title'];
