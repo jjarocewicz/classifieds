@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <?php
-//$dbhost = koetze/WEB3250/Final_Project; 
+//$dbhost = www.koetze01.com/WEB3250/Final_Project; 
 //$dbuser = koetzeze_kelly;
 //$dbpass = sesame;
 //$dbname = koetzeze_classifieds;
@@ -15,6 +15,7 @@ $password = "j6T2&^7eR7";
 $mydb = "dbljtwon_php";
 
 $conn = mysqli_connect($servername, $username, $password, $mydb);
+//$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 //if not connected, echo error, otherwise echo connected message. 
 if (!$conn) { 
      die('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error()); 
