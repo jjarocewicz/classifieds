@@ -2,13 +2,10 @@
         ini_set('display_errors',1);
         error_reporting(E_ALL);
 
-        $target_dir = "uploads/";
+        $target_dir = "public_html/classifieds/uploads/";
         $target_file = $target_dir . basename($_FILES["avatar"]["name"]);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-
-        // var_dump($imageFileType);
-        // die();
 
          if(isset($_POST["submit"])){
             $check = getimagesize($_FILES["avatar"]["tmp_name"]);

@@ -9,6 +9,9 @@
 </head>
 
 <body>
+<?php
+    include "nav.php";
+?>
 <h1>List Item to Sell</h1>
 </body>
 </html>

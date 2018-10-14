@@ -37,7 +37,7 @@
                                             name = "password" required value=' . $password . '><br />
                                             <label for="avatar">Avatar image:</label>');
                                             if ($avatar != ''){
-                                                echo('<img src="' . $avatar . '" alt="avatar" /><br /><input type="file" name="avatar" id="avatar"><br />');
+                                                echo('<img src="public_html/classifieds/uploads/' . $avatar . '" alt="avatar" /><br /><input type="file" name="avatar" id="avatar"><br />');
                                             } else {
                                                 echo('<p>You currently have no avatar, you can upload one by clicking the button below.</p>
                                                 <br />

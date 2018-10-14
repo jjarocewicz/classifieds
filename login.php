@@ -52,7 +52,7 @@
             $mysqli = new mysqli($servername, $username, $password, $mydb);
     
             if (mysqli_connect_error()) {
-                  printf("Connection to the quote database failed, please try again: " . mysqli_connect_error());
+                  printf("Connection to the database failed, please try again: " . mysqli_connect_error());
                   exit();
               } 
       
