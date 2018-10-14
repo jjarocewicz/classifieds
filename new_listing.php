@@ -22,8 +22,12 @@
 			<input type="text" name="description" id="description">
 		</p>
 		<p>
-			<label for="category">Category:</label>
-			<input type="text" name="category" id="category">
+			<select> name="category" id="category">
+				<option> value="auctions and garage, estate, and yard sales">Auctions and Garage, Estate, and Yard Sales</option>
+				<option> value="merchandise">Merchandise</option>
+				<option> value="services">Services</option>
+				<option> value="Pets">Pets</option>			
+			</select>
 		</p>
 		<p>
 			<label for="price">Price:</label>
