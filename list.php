@@ -4,17 +4,27 @@
 
 <head>
     <meta charset="UTF-8">
-	   <link rel="stylesheet" type="text/css" href="css/styles.css">
-    <title>Baker Classifieds - List Item</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Baker Classifieds</title>
+    <link href = "lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel = "stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>
 </head>
 
 <body>
+  <?php
+      //require_once('connection.php');
+      include "nav.php";
+  ?>
 <h1>List Item to Sell</h1>
 </body>
 </html>
 
 <?php
-//require_once('connection.php');
+session_start();
+
 $servername = "localhost"; //"108.179.220.92";
 $username = "root"; //"dbljtwon_root";
 $password = ""; //"j6T2&^7eR7";
