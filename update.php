@@ -22,11 +22,10 @@
         ini_set('display_errors',1);
         error_reporting(E_ALL);
 
-        $target_dir = "public_html/classifieds/uploads/";
-        $target_file = $target_dir . basename($_FILES["avatar"]["name"]);
-
+        $file = addslashes(file_get_contents($_FILES["avatar"]["tmp_name"]));
+        $type = $_FILES["avatar"]["name"];
         $uploadOk = 1;
-        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+        $imageFileType = strtolower($type);
 
          if(isset($_POST["submit"])){
             $check = getimagesize($_FILES["avatar"]["tmp_name"]);
@@ -39,13 +38,13 @@
             }
 
             // Check if file already exists
-            if (file_exists($target_file)) {
+            if (file_exists($file)) {
                 echo "Sorry, file already exists.";
                 $uploadOk = 0;
             }
-            
+            var_dump($_FILES["avatar"]["size"]);
             // Check file size
-            if ($_FILES["avatar"]["size"] > 500000) {
+            if ($_FILES["avatar"]["size"] > 100000) {
                 echo "Sorry, your file is too large.";
                 $uploadOk = 0;
             }
@@ -62,20 +61,14 @@
                 echo "Sorry, your file was not uploaded.";
 
             // if everything is ok, try to upload file
-            } else {
-                if (move_uploaded_file($_FILES["avatar"]["tmp_name"], $target_file)) {
-                    echo "The file ". basename( $_FILES["avatar"]["name"]). " has been uploaded.";
-                } else {
-                    echo "Sorry, there was an error uploading your file.";
-                }
+            // } else {
+            //     if (move_uploaded_file($_FILES["avatar"]["tmp_name"], $file)) {
+            //         echo "The file ". basename( $_FILES["avatar"]["name"]). " has been uploaded.";
+            //     } else {
+            //         echo "Sorry, there was an error uploading your file.";
+            //     }
             }
         }
-
-        $uName = $_POST["username"];
-        $pwd = $_POST["password"];
-        $avatar = $_POST["avatar"];
-        $email = $_POST["email"];
-        $id = $_SESSION["id"];
         
         // Prod
         $servername = "108.179.220.92";
@@ -83,7 +76,7 @@
         $password = "j6T2&^7eR7";
         $mydb = "dbljtwon_php";
 
-        $conn = mysqli_connect($servername, $username, $password, $mydb);
+        $conn = new mysqli($servername, $username, $password, $mydb);
 
         // Check connection
         if (! $conn ) {
@@ -91,21 +84,33 @@
             exit();
         } 
 
-        $sql = "UPDATE `users` SET loginName = '$uName', password = '$pwd', avatar = '$avatar', email = '$email' WHERE idUsers = $id";
+        $uName = $_POST["username"];
+        $pwd = $_POST["password"];
+        $email = $_POST["email"];
+        $id = $_SESSION["id"];
+
+        $sql = "UPDATE `users` SET loginName = '$uName', password = '$pwd', avatar = '$file', email = '$email' WHERE idUsers = $id";
 
         if(mysqli_query($conn, $sql)){
-            echo ('<div>
-            <h3>Your account has been updated.</h3>
-            <p class="underline">Username: ' . $uName . '</p>
-            <p class="underline">Password: ' . $pwd . '</p>
-            <img src="public_html/classifieds/uploads/'. $avatar . '" alt="avatar" />
-            <p class="underline">Email address:' . $email . '</p>           
-            </div>');
+            echo ('<div>');
+            echo ('<h3>Your account has been updated.</h3>');            
+        }
+
+        if ($stmt = $conn->prepare("SELECT * FROM users WHERE idUsers = $id;")) {
+            $stmt->execute();
+            $stmt->bind_result($idUser, $loginName, $pword, $avatar, $emailAddr);
+            while ($stmt->fetch()) {
+                echo ('<p class="underline">Username: ' . $loginName . '</p>
+                    <p class="underline">Password: ' . $pword . '</p>
+                    <p class="underline">Avatar:</p>
+                    <img src="data:image/jpeg;base64,' . base64_encode($avatar) . '" height="100" width="100" class="img-thumnail" />
+                    <p class="underline">Email address:' . $emailAddr . '</p>           
+                </div>');
+            } 
         } else {
             echo ('There\'s been an error, please try updating your account again' . mysqli_error($conn));
         }
-
-        mysqli_close($conn);
+    mysqli_close($conn);
 ?>
 </div>
 </body>

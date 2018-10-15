@@ -26,7 +26,7 @@
             <input type="password" name="password" id="password" class="form-control" required />
             <br />
             <label for="avatar">Upload an avatar:</label>
-            <p>(optional)</p>
+            <p>(optional, 50kb or less)</p>
             <input type="file" name="avatar" id="avatar">
             <br />
             <label for="email">Email address:</label>

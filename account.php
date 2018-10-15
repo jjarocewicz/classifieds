@@ -26,7 +26,7 @@
                     $id = $_SESSION['id'];
                     
                                 echo(
-                                    '<form class = "form-account col-sm-6 col-sm-offset-3" role = "form" action = "update.php" method = "post">
+                                    '<form class = "form-account col-sm-6 col-sm-offset-3" role = "form" action = "update.php" method = "post" enctype="multipart/form-data">
                                             <h4 class = "form-account-heading"></h4>
                                             <label for = "username">Username:</label>
                                             <input type = "text" class = "form-control" 
@@ -37,11 +37,19 @@
                                             name = "password" required value=' . $password . '><br />
                                             <label for="avatar">Avatar image:</label>');
                                             if ($avatar != ''){
-                                                echo('<img src="public_html/classifieds/uploads/' . $avatar . '" alt="avatar" /><br /><input type="file" name="avatar" id="avatar"><br />');
+                                                echo('<img src="data:image/jpeg;base64,' . base64_encode($avatar) . '" height="100" width="100" class="img-thumnail" />
+                                                <br />
+                                                <p>To change you avatar select a new file from here:</p>
+                                                <p>(less than 50kb)</p>
+                                                <br />
+                                                <input type="file" name="avatar" id="avatar">
+                                                <br />');
                                             } else {
                                                 echo('<p>You currently have no avatar, you can upload one by clicking the button below.</p>
+                                                <p>(less than 50kb)</p>
                                                 <br />
-                                                <input type="file" name="avatar" id="avatar"><br />');
+                                                <input type="file" name="avatar" id="avatar">
+                                                <br />');
                                             }
                                             echo(
                                                 '<label for="email">Email address:</label>
