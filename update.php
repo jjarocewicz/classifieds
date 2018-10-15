@@ -42,7 +42,7 @@
                 echo "Sorry, file already exists.";
                 $uploadOk = 0;
             }
-            var_dump($_FILES["avatar"]["size"]);
+            
             // Check file size
             if ($_FILES["avatar"]["size"] > 100000) {
                 echo "Sorry, your file is too large.";
