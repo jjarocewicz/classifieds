@@ -25,7 +25,7 @@
         $file = addslashes(file_get_contents($_FILES["avatar"]["tmp_name"]));
         $type = $_FILES["avatar"]["name"];
         $uploadOk = 1;
-        $imageFileType = strtolower($type);
+        $imageFileType = explode(".", $type);
 
          if(isset($_POST["submit"])){
             $check = getimagesize($_FILES["avatar"]["tmp_name"]);
@@ -42,7 +42,7 @@
                 echo "Sorry, file already exists.";
                 $uploadOk = 0;
             }
-            
+
             // Check file size
             if ($_FILES["avatar"]["size"] > 100000) {
                 echo "Sorry, your file is too large.";
@@ -50,8 +50,8 @@
             }
 
             // Allow certain file formats
-            if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-            && $imageFileType != "gif" ) {
+            if($imageFileType[1] != "jpg" && $imageFileType[1] != "png" && $imageFileType[1] != "jpeg"
+            && $imageFileType[1] != "gif" ) {
                 echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
                 $uploadOk = 0;
             }
@@ -103,7 +103,7 @@
                 echo ('<p class="underline">Username: ' . $loginName . '</p>
                     <p class="underline">Password: ' . $pword . '</p>
                     <p class="underline">Avatar:</p>
-                    <img src="data:image/jpeg;base64,' . base64_encode($avatar) . '" height="100" width="100" class="img-thumnail" />
+                    <img src="data:image/jpeg;base64,' . base64_encode($avatar) . '" height="100" width="100" class="img-thumbnail" />
                     <p class="underline">Email address:' . $emailAddr . '</p>           
                 </div>');
             } 

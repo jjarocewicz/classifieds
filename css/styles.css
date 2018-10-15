@@ -68,10 +68,12 @@
      width: 3%;
      height: auto;
  }
-<<<<<<< HEAD
 
  .underline {
      text-decoration: underline;
  }
-=======
->>>>>>> 778f99258636a13bb391d0c9e47340105de24861
+
+ .img-thumbnail {
+    max-width: 100px;
+    height: 100px;
+ }

@@ -35,21 +35,21 @@
                 $stmt->execute();
                 $stmt->bind_result($id, $title, $description, $image, $category, $price, $sold);
                 while ($stmt->fetch()) {
-                    echo "<div class='media'>
-                            <div class='media-left'>
-                            <a href='#'>
-                            <img src='data:image/jpeg;base64,'" . base64_encode($image) . "' height='100' width='100' class='img-thumnail' />
-                            </a>
+                    if ($sold === 0){
+                    echo '<div class="media">
+                            <div class="media-left">
+                            <img src="data:image/jpeg;base64,' . base64_encode($image) . '" height="100" width="100" class="img-thumbnail" />
                             </div>
-                            <div class='media-body'>
-                            <h4 class='media-heading'><a href='#'>" . $title . "</a></h4>
-                            <p>" . $description . "</p>
-                            <em>" . $category . "</em>
+                            <div class="media-body">
+                            <a href="#"><h4 class="media-heading"><a href="#">' . $title . '</h4></a>
+                            <p>' . $description . '</p>
+                            <em>' . $category . '</em>
                             <br />
-                            <p>$" . $price . ".00</p>
+                            <p>$' . $price . '.00</p>
                             </div>
-                        </div>";
+                        </div>';
                 }
+            } 
             $stmt->close();
         }
         $mysqli->close();

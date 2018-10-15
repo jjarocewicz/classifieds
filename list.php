@@ -22,78 +22,85 @@
 
 <?php
 
-$servername = "localhost"; //"108.179.220.92";
-$username = "root"; //"dbljtwon_root";
-$password = ""; //"j6T2&^7eR7";
-$mydb = "dbljtwon_php";
+ini_set('display_errors',1);
+        error_reporting(E_ALL);
 
-$dbconnect=mysqli_connect($servername, $username, $password, $mydb);
+        $file = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
+        $type = $_FILES["image"]["name"];
+        $uploadOk = 1;
+        $imageFileType = explode(".", $type);
 
-if ($dbconnect->connect_error) {
-  die("Database connection failed: " . $dbconnect->connect_error);
-}
+         if(isset($_POST["submit"])){
+            $check = getimagesize($_FILES["image"]["tmp_name"]);
+            if($check !== false) {
+                //echo "File is an image - " . $check["mime"] . ".";
+                $uploadOk = 1;
+            } else {
+                echo "File is not an image.";
+                $uploadOk = 0;
+            }
 
-    $target_dir = "uploads/";
-    $target_file = $target_dir . basename($_FILES["imageToUpload"] ["name"]);
-    $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+            // Check if file already exists
+            if (file_exists($file)) {
+                echo "Sorry, file already exists.";
+                $uploadOk = 0;
+            }
+            
+            // Check file size
+            if ($_FILES["image"]["size"] > 100000) {
+                echo "Sorry, your file is too large.";
+                $uploadOk = 0;
+            }
 
-    // Check if image file is a actual image or fake image
+            // Allow certain file formats
+            if($imageFileType[1] != "jpg" && $imageFileType[1] != "png" && $imageFileType[1] != "jpeg"
+            && $imageFileType[1] != "gif" ) {
+                echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                $uploadOk = 0;
+            }
 
-    if(isset($_POST['submit'])) {
-      $title=$_POST['title'];
-      $description=$_POST['description'];
+            // Check if $uploadOk is set to 0 by an error
+            if ($uploadOk == 0) {
+                echo "Sorry, your file was not uploaded.";
 
-      $check = getimagesize($_FILES["imageToUpload"]["temp_name"]);
-        if($check !== false) {
-          echo "File is an image - " . $check["mime"] . ".";
-          $uploadOk = 1;
-        } else {
-          echo "File is not an image.";
-          $uploadOk = 0;
+            // if everything is ok, try to upload file
+            // } else {
+            //     if (move_uploaded_file($_FILES["avatar"]["tmp_name"], $file)) {
+            //         echo "The file ". basename( $_FILES["avatar"]["name"]). " has been uploaded.";
+            //     } else {
+            //         echo "Sorry, there was an error uploading your file.";
+            //     }
+            }
         }
-      }
+        
+        // Prod
+        $servername = "108.179.220.92";
+        $username = "dbljtwon_root";
+        $password = "j6T2&^7eR7";
+        $mydb = "dbljtwon_php";
 
-      // Check if file already exists
-      if (file_exists($target_file)) {
-        echo "Sorry, file already exists.";
-        $uploadOk = 0;
-      }
+        $conn = new mysqli($servername, $username, $password, $mydb);
 
-      // Check file size
-      if ($_FILES["fileToUpload"]["size"] > 500000) {
-        echo "Sorry, your file is too large.";
-        $uploadOk = 0;
-      }
+        // Check connection
+        if (! $conn ) {
+            printf("Connection to the database failed, please try again: " . mysqli_error());
+            exit();
+        } 
 
-      // Allow certain file formats
-      if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
-        echo "Sorry, only JPG, JPEG, PNG, & GIF files are allowed.";
-          $uploadOk = 0;
-      }
-
-      // Check if $uploadOk is set to 0 by an error
-      if ($uploadOk == 0) {
-        echo "Sorry, your file was not uploaded.";
-      // if everything is ok, try to upload file
-    } else {
-        if (move_uploaded_file($_FILES["imageToUpload"]["tmp_name"], $target_file)) {
-          echo "The file " . basename( $_FILES["imageToUpload"]["name"]) . " has been uploaded.";
-        } else {
-            echo "Sorry, there was an error uploading your file.";
-        }
-    }
-
+    
       $category=$_POST['category'];
       $price=$_POST['price'];
+      $title = $_POST['title'];
+      $description = $_POST['description'];
 
 
-      $query = "INSERT INTO products (title, description, category, price) VALUES ('$title', '$description', '$category', '$price')";
+      $query = "INSERT INTO products (title, description, image, category, price) VALUES ('$title', '$description', '$file', '$category', '$price')";
 
-      if(!mysqli_query($dbconnect, $query)) {
-          echo "<p align='center'><font color=red>An error occurred when submitting your listing</font></p>"; //('An error occurred when submitting your listing');
-        } else {
+
+      if(mysqli_query($conn, $query)) {           
           echo "<p align='center'><font color=blue>You have successfully listed your item!</font></p>";
+        } else {
+            echo "<p align='center'><font color=red>An error occurred when submitting your listing</font></p>";
         }
 
 ?>

@@ -17,19 +17,15 @@
 
     <div class="container" id="listing_fields">
 
-<<<<<<< HEAD
       <form class = "form-listing" role = "form" action="list.php" method="post" enctype="multipart/form-data">
-=======
-      <form class = "form-listing" role = "form" action="list.php" method="post" enctype="multipart/form-data>
->>>>>>> 778f99258636a13bb391d0c9e47340105de24861
 			     <label for="title">Title:</label>
-			     <input type="text" class = "form-control" name="title" id="title"></br>
+			     <input type="text" class = "form-control" name="title" id="title"><br>
 
 			     <label for="description">Description:</label>
-			     <input type="text" class = "form-control" name="description" id="description"></br>
+			     <input type="text" class = "form-control" name="description" id="description"><br>
 
-           <label for="imageToUpload">Select image to upload:</label>
-           <input type="file" name="imageToUpload" id="imageToUpload"></br>
+           <label for="image">Select image to upload:</label>
+           <input type="file" name="image" id="image"><br>
 
            <label for="category">Please Choose a category:</label>
 			     <select class = "form-control" name="category" id="category">
@@ -39,10 +35,11 @@
   				         <option value="3">Services</option>
   				         <option value="4">Pets</option>
                 </optgroup>
-			     </select></br>
+			    </select><br>
 
 			     <label for="price">Price:</label>
-			     <input type="text" class = "form-control" name="price" id="price"></br>
+                 <small>currency (numbers) only please</small>
+			     <input type="text" class = "form-control" name="price" id="price"><br>
 
 		       <input class="btn btn-lg btn-primary btn-block" type="submit" value="Submit" name="submit">
 	    </form>
