@@ -31,7 +31,7 @@
             exit();
         } 
 
-        if ($stmt = $mysqli->prepare("SELECT * FROM products;")) {
+        if ($stmt = $mysqli->prepare("SELECT `products`.`idProducts`, `products`.`title`, `products`.`description`, `products`.`image`, `category`.`categoryName`, `products`.`price`, `products`.`sold` FROM `products` INNER JOIN `category` ON `products`.`category` = `category`.`idCategory` ORDER BY `products`.`idProducts` DESC")) {
                 $stmt->execute();
                 $stmt->bind_result($id, $title, $description, $image, $category, $price, $sold);
                 while ($stmt->fetch()) {
