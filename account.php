@@ -37,7 +37,7 @@
                                             name = "password" required value=' . $password . '><br />
                                             <label for="avatar">Avatar image:</label>');
                                             if ($avatar != ''){
-                                                echo('<img src="data:image/jpeg;base64,' . base64_encode($avatar) . '" height="100" width="100" class="img-thumnail" />
+                                                echo('<img src="data:image/jpeg;base64,' . base64_encode($avatar) . '" height="100" width="100" class="img-thumbnail" />
                                                 <br />
                                                 <p>To change you avatar select a new file from here:</p>
                                                 <p>(less than 50kb)</p>
