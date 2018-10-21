@@ -54,6 +54,10 @@
     text-align: center;
  }
 
+ h4 {
+     padding: 0 !important;
+ }
+
  #logo {
     width: auto;
     margin: 0 auto;

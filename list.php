@@ -25,6 +25,7 @@
 ini_set('display_errors',1);
         error_reporting(E_ALL);
 
+<<<<<<< HEAD
         $file = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
         $type = $_FILES["image"]["name"];
         $uploadOk = 1;
@@ -73,6 +74,50 @@ ini_set('display_errors',1);
             }
         }
 
+=======
+        if ($_FILES["image"] != "" && $_FILES["image"] != NULL){
+            $file = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
+            $type = $_FILES["image"]["name"];
+            $uploadOk = 1;
+            $imageFileType = explode(".", $type);
+
+            if(isset($_POST["submit"])){
+                $check = getimagesize($_FILES["image"]["tmp_name"]);
+                if($check !== false) {
+                    echo "File is an image - " . $check["mime"] . ".";
+                    $uploadOk = 1;
+                } else {
+                    echo "File is not an image.";
+                    $uploadOk = 0;
+                }
+    
+                // Check if file already exists
+                if (file_exists($file)) {
+                    echo "Sorry, file already exists.";
+                    $uploadOk = 0;
+                }
+    
+                // Check file size
+                if ($_FILES["image"]["size"] > 100000) {
+                    echo "Sorry, your file is too large.";
+                    $uploadOk = 0;
+                }
+    
+                // Allow certain file formats
+                if($imageFileType[1] != "jpg" && $imageFileType[1] != "png" && $imageFileType[1] != "jpeg"
+                && $imageFileType[1] != "gif" ) {
+                    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                    $uploadOk = 0;
+                }
+    
+                // Check if $uploadOk is set to 0 by an error
+                if ($uploadOk == 0) {
+                    echo "Sorry, your file was not uploaded.";
+                }
+            }
+        }           
+        
+>>>>>>> ee066e985e809852d0d3f2caf05eeb48163d06db
         // Prod
         $servername = "108.179.220.92";
         $username = "dbljtwon_root";
@@ -85,9 +130,14 @@ ini_set('display_errors',1);
         if (! $conn ) {
             printf("Connection to the database failed, please try again: " . mysqli_error());
             exit();
+<<<<<<< HEAD
         }
 
 
+=======
+        } 
+    
+>>>>>>> ee066e985e809852d0d3f2caf05eeb48163d06db
       $category=$_POST['category'];
       $price=$_POST['price'];
       $title = $_POST['title'];

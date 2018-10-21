@@ -13,10 +13,22 @@
 <body>
 <?php
     include "nav.php";
+    ob_start();
+    session_start();
 ?>
 <div class="container">
-    <h4>Items for sale:</h4>
+    <div class="row">
+        <h2>Baker College Classifieds</h2>
+    </div>
+    <div class="row">
+        <h4 class="col-sm-6">Items for sale:</h4>
+    </div>
+    <div class="row">
     <?php
+
+        ini_set('display_errors',1);
+        error_reporting(E_ALL);
+
         // Prod
         $servername = "108.179.220.92";
         $username = "dbljtwon_root";
@@ -29,6 +41,7 @@
         if (mysqli_connect_error()) {
             printf("Connection to the database failed, please try again: " . mysqli_connect_error());
             exit();
+<<<<<<< HEAD
         }
 
         $query = mysqli_query($mysqli, "SELECT idProducts FROM products");
@@ -61,6 +74,68 @@
           }
         }
 
+=======
+        } 
+        
+        // set page limit and page number
+        $limit = 5;  
+        if (isset($_GET["page"])) { 
+            $page = $_GET["page"]; 
+        } else { 
+            $page = 1; 
+        };  
+
+        $start_from = ($page-1) * $limit;    
+
+        if ($stmt = $mysqli->prepare("SELECT `products`.`idProducts`, `products`.`title`, `products`.`description`, `products`.`image`, `category`.`categoryName`, `products`.`price`, `products`.`sold` FROM `products` INNER JOIN `category` ON `products`.`category` = `category`.`idCategory` ORDER BY `products`.`idProducts` DESC LIMIT $start_from, $limit")) {
+                $stmt->execute();
+                $stmt->bind_result($id, $title, $description, $image, $category, $price, $sold);
+                while ($stmt->fetch()) {
+                    if ($sold === 0){
+                    echo '<div class="media">
+                            <div class="media-left">';
+                            if ($image != NULL){
+                                echo '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" height="100" width="100" class="img-thumbnail" />';
+                            } else {
+                                echo '<img src="images/No_Image_Available.png" height="100" width="100" class="img-thumbnail" />';
+                            }
+                            echo '</div>
+                            <div class="media-body">
+                                <a href="#"><h4 class="media-heading"><a href="#">' . $title . '</h4></a>
+                                <p>' . $description . '</p>
+                                <em>' . $category . '</em>
+                                <br />
+                                <p>$' . $price . '.00</p>
+                            </div>
+                        </div>
+                    ';
+                } 
+            } 
+            $stmt->close();
+        }
+            $conn = mysqli_connect($servername, $username, $password, $mydb);
+            $sql = "SELECT COUNT(idProducts) FROM `products` where sold = 0";
+
+            $rs_result = mysqli_query($conn, $sql);  
+            $row = mysqli_fetch_row($rs_result);  
+            $total_records = $row[0];  
+            $total_pages = ceil($total_records / $limit);  
+                    echo('<nav aria-label="Page navigation" style="float: right;">
+                            <ul class="pagination">');
+                    $pagLink = "";                       
+                    for ($i=1; $i<=$total_pages; $i++) { 
+                    if($i==$page)  
+                        $pagLink .= "<li class='active'>
+                                        <a href='index.php?page= ".$i."'>".$i."</a>
+                                    </li>"; 
+                    else
+                        $pagLink .= "<li>
+                                        <a href='index.php?page=".$i."'>".$i."</a>
+                                    </li>";   
+                    };   
+                    echo $pagLink . '</ul>
+                            </nav>';                    
+>>>>>>> ee066e985e809852d0d3f2caf05eeb48163d06db
         $mysqli->close();
 
     </div>
