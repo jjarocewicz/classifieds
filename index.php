@@ -18,6 +18,9 @@
 ?>
 <div class="container">
     <div class="row">
+        <h2>Baker College Classifieds</h2>
+    </div>
+    <div class="row">
         <h4 class="col-sm-6">Items for sale:</h4>
     </div>
     <div class="row">

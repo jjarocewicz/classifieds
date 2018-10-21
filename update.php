@@ -94,11 +94,11 @@
             $stmt->execute();
             $stmt->bind_result($idUser, $loginName, $pword, $avatar, $emailAddr);
             while ($stmt->fetch()) {
-                echo ('<p class="underline">Username: ' . $loginName . '</p>
-                    <p class="underline">Password: ' . $pword . '</p>
-                    <p class="underline">Avatar:</p>
-                    <img src="data:image/jpeg;base64,' . base64_encode($avatar) . '" height="100" width="100" class="img-thumbnail" />
-                    <p class="underline">Email address:' . $emailAddr . '</p>           
+                echo ('<p><span class="underline">Username:</span> ' . $loginName . '</p>
+                    <p><span class="underline">Password:</span> ' . $pword . '</p>
+                    <p><span class="underline">Avatar:</span> </p>
+                        <img src="data:image/jpeg;base64,' . base64_encode($avatar) . '" height="100" width="100" class="img-thumbnail" />
+                    <p><span class="underline">Email address:</span> ' . $emailAddr . '</p>           
                 </div>');
             } 
         } else {
