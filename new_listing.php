@@ -12,6 +12,7 @@
 <body>
   <?php
       include "nav.php";
+      //include "search.php";
   ?>
     <h3>Baker Classifieds - New Listing</h3>
 

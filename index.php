@@ -29,31 +29,41 @@
         if (mysqli_connect_error()) {
             printf("Connection to the database failed, please try again: " . mysqli_connect_error());
             exit();
-        } 
-
-        if ($stmt = $mysqli->prepare("SELECT * FROM products;")) {
-                $stmt->execute();
-                $stmt->bind_result($id, $title, $description, $image, $category, $price, $sold);
-                while ($stmt->fetch()) {
-                    if ($sold === 0){
-                    echo '<div class="media">
-                            <div class="media-left">
-                            <img src="data:image/jpeg;base64,' . base64_encode($image) . '" height="100" width="100" class="img-thumbnail" />
-                            </div>
-                            <div class="media-body">
-                            <a href="#"><h4 class="media-heading"><a href="#">' . $title . '</h4></a>
-                            <p>' . $description . '</p>
-                            <em>' . $category . '</em>
-                            <br />
-                            <p>$' . $price . '.00</p>
-                            </div>
-                        </div>';
-                }
-            } 
-            $stmt->close();
         }
+
+        $query = mysqli_query($mysqli, "SELECT idProducts FROM products");
+
+        //list items
+        while($row=mysqli_fetch_array($query))
+        {
+          if ($stmt = $mysqli->prepare("SELECT * FROM products;")) {
+                  $stmt->execute();
+                  $stmt->bind_result($id, $title, $description, $image, $category, $price, $sold);
+                  while ($stmt->fetch()) {
+                      if ($sold === 0) {
+                          <div class="media">
+                              <div class="media-left">
+                              <img src="data:image/jpeg;base64,' . base64_encode($image) . '" height="100" width="100" class="img-thumbnail" />
+                              </div>
+                              <div class="media-body">
+                              <h4 class="media-heading">
+                              "<a href='buy.php?idProducts=" . $row['idProducts'] . $row['title'] "</a>"
+                              </h4>
+                              <p>' . $description . '</p>
+                              <em>' . $category . '</em>
+                              <br />
+                              <p>$' . $price . '.00</p>
+                              </div>
+                          </div>
+                  }
+              }
+              $stmt->close();
+          }
+        }
+
         $mysqli->close();
-    ?>
+
     </div>
 </body>
 </html>
+?>

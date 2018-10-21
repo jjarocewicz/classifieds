@@ -45,7 +45,7 @@ ini_set('display_errors',1);
                 echo "Sorry, file already exists.";
                 $uploadOk = 0;
             }
-            
+
             // Check file size
             if ($_FILES["image"]["size"] > 100000) {
                 echo "Sorry, your file is too large.";
@@ -72,7 +72,7 @@ ini_set('display_errors',1);
             //     }
             }
         }
-        
+
         // Prod
         $servername = "108.179.220.92";
         $username = "dbljtwon_root";
@@ -85,9 +85,9 @@ ini_set('display_errors',1);
         if (! $conn ) {
             printf("Connection to the database failed, please try again: " . mysqli_error());
             exit();
-        } 
+        }
 
-    
+
       $category=$_POST['category'];
       $price=$_POST['price'];
       $title = $_POST['title'];
@@ -97,7 +97,7 @@ ini_set('display_errors',1);
       $query = "INSERT INTO products (title, description, image, category, price) VALUES ('$title', '$description', '$file', '$category', '$price')";
 
 
-      if(mysqli_query($conn, $query)) {           
+      if(mysqli_query($conn, $query)) {
           echo "<p align='center'><font color=blue>You have successfully listed your item!</font></p>";
         } else {
             echo "<p align='center'><font color=red>An error occurred when submitting your listing</font></p>";
