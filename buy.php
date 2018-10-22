@@ -39,7 +39,7 @@
               <span>'.$_GET["image"].'</span><br>
               <span>Category: '.$_GET["category"].'</span><br>
               <span>Price: '.$_GET["price"].'</span><br>';
-            } 
+            }
           }else {
               echo "Sorry - Cannot locate item in database.";
             }
