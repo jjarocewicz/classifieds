@@ -14,7 +14,7 @@
 <?php
     include "nav.php";
     ob_start();
-    //session_start();
+    session_start();
 ?>
 <div class="container">
     <div class="row">
@@ -41,16 +41,8 @@
             exit();
         }
 
-        //<<<<<<< HEAD
-
-        $query = mysqli_query($mysqli, "SELECT * FROM products WHERE idProducts='$item_id' ");
-        $_SESSION ["idProducts"] = $idProducts;
-        $_SESSION ["title"] = $title;
-        $_SESSION ["description"] = $description;
-        $_SESSION ["image"] = $image;
-        $_SESSION ["category"] = $category;
-        $_SESSION ["price"] = $price;
-        $_SESSION ["sold"] = $sold;
+       // $query = mysqli_query($mysqli, "SELECT * FROM products WHERE idProducts='$id' ");
+       
 
 
         // set page limit and page number
@@ -61,73 +53,78 @@
             $page = 1;
         }
         $start_from = ($page-1) * $limit;
+
         if ($stmt = $mysqli->prepare("SELECT `products`.`idProducts`, `products`.`title`, `products`.`description`, `products`.`image`, `category`.`categoryName`, `products`.`price`, `products`.`sold` FROM `products` INNER JOIN `category` ON `products`.`category` = `category`.`idCategory` ORDER BY `products`.`idProducts` DESC LIMIT $start_from, $limit")) {
                 $stmt->execute();
                 $stmt->bind_result($id, $title, $description, $image, $category, $price, $sold);
                 while ($stmt->fetch()) {
                     if ($sold === 0){
-                      <div class="media">
-                            <div class="media-left">
+                        $_SESSION["idProducts"] = $id;
+                        $_SESSION["title"] = $title;
+                        $_SESSION["description"] = $description;
+                        $_SESSION["image"] = $image;
+                        $_SESSION["category"] = $category;
+                        $_SESSION["price"] = $price;
+                        $_SESSION["sold"] = $sold;
+                        echo '<div class="media">
+                            <div class="media-left">';
                             if ($image != NULL){
                                 echo '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" height="100" width="100" class="img-thumbnail" />';
                             } else {
                                 echo '<img src="images/No_Image_Available.png" height="100" width="100" class="img-thumbnail" />';
                             }
-                            echo </div>
+                            echo '</div>
                             <div class="media-body">
-                              <h4 class="media-heading">
-                              $query = mysqli_query($mysqli, "SELECT * FROM products WHERE idProducts='$item_id' ");
-                              </h4>
+                              <h4 class="media-heading">';
+                              //$query = mysqli_query($mysqli, "SELECT * FROM products WHERE idProducts='$id'");
+                            echo '</h4>
                                 <p>' . $description . '</p>
                                 <em>' . $category . '</em>
                                 <br />
                                 <p>$' . $price . '.00</p>
                             </div>
-                        </div>
+                        </div>';
                 }
             }
             $stmt->close();
-          }
-
-//=======
-    }
+          }    
 
     // set page limit and page number
-    $limit = 5;
-    if (isset($_GET["page"])) {
-        $page = $_GET["page"];
-    } else {
-        $page = 1;
-    };
+    // $limit = 5;
+    // if (isset($_GET["page"])) {
+    //     $page = $_GET["page"];
+    // } else {
+    //     $page = 1;
+    // };
 
-    $start_from = ($page-1) * $limit;
+    // $start_from = ($page-1) * $limit;
 
-    if ($stmt = $mysqli->prepare("SELECT `products`.`idProducts`, `products`.`title`, `products`.`description`, `products`.`image`, `category`.`categoryName`, `products`.`price`, `products`.`sold` FROM `products` INNER JOIN `category` ON `products`.`category` = `category`.`idCategory` ORDER BY `products`.`idProducts` DESC LIMIT $start_from, $limit")) {
-            $stmt->execute();
-            $stmt->bind_result($id, $title, $description, $image, $category, $price, $sold);
-            while ($stmt->fetch()) {
-                if ($sold === 0){
-                echo '<div class="media">
-                        <div class="media-left">';
-                        if ($image != NULL){
-                            echo '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" height="100" width="100" class="img-thumbnail" />';
-                        } else {
-                            echo '<img src="images/No_Image_Available.png" height="100" width="100" class="img-thumbnail" />';
-                        }
-                        echo '</div>
-                        <div class="media-body">
-                            <a href="#"><h4 class="media-heading"><a href="#">' . $title . '</h4></a>
-                            <p>' . $description . '</p>
-                            <em>' . $category . '</em>
-                            <br />
-                            <p>$' . $price . '.00</p>
-                        </div>
-                    </div>
-                ';
-            }
-        }
-        $stmt->close();
-    }
+    // if ($stmt = $mysqli->prepare("SELECT `products`.`idProducts`, `products`.`title`, `products`.`description`, `products`.`image`, `category`.`categoryName`, `products`.`price`, `products`.`sold` FROM `products` INNER JOIN `category` ON `products`.`category` = `category`.`idCategory` ORDER BY `products`.`idProducts` DESC LIMIT $start_from, $limit")) {
+    //         $stmt->execute();
+    //         $stmt->bind_result($id, $title, $description, $image, $category, $price, $sold);
+    //         while ($stmt->fetch()) {
+    //             if ($sold === 0){
+    //             echo '<div class="media">
+    //                     <div class="media-left">';
+    //                     if ($image != NULL){
+    //                         echo '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" height="100" width="100" class="img-thumbnail" />';
+    //                     } else {
+    //                         echo '<img src="images/No_Image_Available.png" height="100" width="100" class="img-thumbnail" />';
+    //                     }
+    //                     echo '</div>
+    //                     <div class="media-body">
+    //                         <a href="#"><h4 class="media-heading"><a href="#">' . $title . '</h4></a>
+    //                         <p>' . $description . '</p>
+    //                         <em>' . $category . '</em>
+    //                         <br />
+    //                         <p>$' . $price . '.00</p>
+    //                     </div>
+    //                 </div>
+    //             ';
+    //         }
+    //     }
+    //     $stmt->close();
+    // }
         $conn = mysqli_connect($servername, $username, $password, $mydb);
         $sql = "SELECT COUNT(idProducts) FROM `products` where sold = 0";
 
@@ -150,10 +147,9 @@
                 };
                 echo $pagLink . '</ul>
                         </nav>';
-//>>>>>>> ee066e985e809852d0d3f2caf05eeb48163d06db
     $mysqli->close();
 
 ?>
-</div>
+
 </body>
 </html>
