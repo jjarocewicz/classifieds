@@ -56,10 +56,10 @@
 
         if ($stmt = $mysqli->prepare("SELECT `products`.`idProducts`, `products`.`title`, `products`.`description`, `products`.`image`, `category`.`categoryName`, `products`.`price`, `products`.`sold` FROM `products` INNER JOIN `category` ON `products`.`category` = `category`.`idCategory` ORDER BY `products`.`idProducts` DESC LIMIT $start_from, $limit")) {
                 $stmt->execute();
-                $stmt->bind_result($id, $title, $description, $image, $category, $price, $sold);
+                $stmt->bind_result($idProducts, $title, $description, $image, $category, $price, $sold);
                 while ($stmt->fetch()) {
                     if ($sold === 0){
-                        $_SESSION["idProducts"] = $id;
+                        $_SESSION["idProducts"] = $idProducts;
                         $_SESSION["title"] = $title;
                         $_SESSION["description"] = $description;
                         $_SESSION["image"] = $image;
@@ -67,23 +67,23 @@
                         $_SESSION["price"] = $price;
                         $_SESSION["sold"] = $sold;
                         echo '<div class="media">
-                            <div class="media-left">';
-                            if ($image != NULL){
-                                echo '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" height="100" width="100" class="img-thumbnail" />';
-                            } else {
-                                echo '<img src="images/No_Image_Available.png" height="100" width="100" class="img-thumbnail" />';
-                            }
+                                <div class="media-left">';
+                                if ($image != NULL){
+                                    echo '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" height="100" width="100" class="img-thumbnail" />';
+                                } else {
+                                    echo '<img src="images/No_Image_Available.png" height="100" width="100" class="img-thumbnail" />';
+                                }
                             //$query = mysqli_query($mysqli, "SELECT * FROM products WHERE idProducts='$id'");
                         echo '</div>
-                            <div class="media-body">
-                              <h4 class="media-heading">                              
-                              <a href="buy.php?idProducts="' . $row["idProducts"] . $row["title"] . '"</a>
-                              </h4>
-                                <p>' . $description . '</p>
-                                <em>' . $category . '</em>
-                                <br />
-                                <p>$' . $price . '.00</p>
-                            </div>
+                                <div class="media-body">
+                                <h4 class="media-heading">                              
+                                    <a href="buy.php?idProducts="'.$idProducts.$title.'">'.$title.'</a>
+                                </h4>
+                                    <p>' . $description . '</p>
+                                    <em>' . $category . '</em>
+                                    <br />
+                                    <p>$' . $price . '.00</p>
+                                </div>
                         </div>';
                 }
             }
