@@ -32,18 +32,18 @@
           {
             while($row = mysqli_fetch_array($query))
             {
-              <p>Title: <?php echo $_GET["title"]; ?></p>
-              <span>Item: <?php echo $_GET["idProducts"]; ?></span><br>
-              <span>Description: <?php echo $_GET["description"]; ?></span><br>
+              echo '<p>Title: '. $_GET["title"] .'</p>
+              <span>Item: '.$_GET["idProducts"].'</span><br>
+              <span>Description: '.$_GET["description"].'</span><br>
               <br>
-              <span><?php echo $_GET["image"]; ?></span><br>
-              <span>Category: <?php echo $_GET["category"]; ?></span><br>
-              <span>Price: <?php echo $_GET["price"]; ?></span><br>
-            } else {
+              <span>'.$_GET["image"].'</span><br>
+              <span>Category: '.$_GET["category"].'</span><br>
+              <span>Price: '.$_GET["price"].'</span><br>';
+            } 
+          }else {
               echo "Sorry - Cannot locate item in database.";
             }
           }
-        }
       ?>
 
   </body>
