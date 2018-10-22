@@ -38,7 +38,7 @@
             while($row = mysqli_fetch_array($query))
             {
               <p>Title: <?php echo $_GET["title"]; ?></p>
-              <span>Item: <?php echo ["idProducts"]; ?></span><br>
+              <span>Item: <?php echo $_GET["idProducts"]; ?></span><br>
               <span>Description: <?php echo $_GET["description"]; ?></span><br>
               <br>
               <span><?php echo $_GET["image"]; ?></span><br>

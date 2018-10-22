@@ -41,17 +41,24 @@
         if (mysqli_connect_error()) {
             printf("Connection to the database failed, please try again: " . mysqli_connect_error());
             exit();
-<<<<<<< HEAD
+//<<<<<<< HEAD
         }
 
-        $query = mysqli_query($mysqli, "SELECT idProducts FROM products");
+        $query = mysqli_query($mysqli, "SELECT * FROM products WHERE idProducts='$item_id' ");
+        $_SESSION ["idProducts"] = $idProducts;
+        $_SESSION ["title"] = $title;
+        $_SESSION ["description"] = $description;
+        $_SESSION ["image"] = $image;
+        $_SESSION ["category"] = $category;
+        $_SESSION ["price"] = $price;
+        $_SESSION ["sold"] = $sold;
 
         //list items
         while($row=mysqli_fetch_array($query))
         {
-          if ($stmt = $mysqli->prepare("SELECT * FROM products;")) {
+          if ($stmt = $mysqli->prepare("SELECT * FROM products")) {
                   $stmt->execute();
-                  $stmt->bind_result($id, $title, $description, $image, $category, $price, $sold);
+                  $stmt->bind_result($idProducts, $title, $description, $image, $category, $price, $sold);
                   while ($stmt->fetch()) {
                       if ($sold === 0) {
                           <div class="media">
@@ -60,7 +67,7 @@
                               </div>
                               <div class="media-body">
                               <h4 class="media-heading">
-                              "<a href='buy.php?idProducts=" . $row['idProducts'] . $row['title'] "</a>"
+                              <a href='buy.php?idProducts= . $row['idProducts'] . $row['title'] '/>
                               </h4>
                               <p>' . $description . '</p>
                               <em>' . $category . '</em>
@@ -75,17 +82,17 @@
         }
 
 =======
-        } 
-        
-        // set page limit and page number
-        $limit = 5;  
-        if (isset($_GET["page"])) { 
-            $page = $_GET["page"]; 
-        } else { 
-            $page = 1; 
-        };  
+        }
 
-        $start_from = ($page-1) * $limit;    
+        // set page limit and page number
+        $limit = 5;
+        if (isset($_GET["page"])) {
+            $page = $_GET["page"];
+        } else {
+            $page = 1;
+        };
+
+        $start_from = ($page-1) * $limit;
 
         if ($stmt = $mysqli->prepare("SELECT `products`.`idProducts`, `products`.`title`, `products`.`description`, `products`.`image`, `category`.`categoryName`, `products`.`price`, `products`.`sold` FROM `products` INNER JOIN `category` ON `products`.`category` = `category`.`idCategory` ORDER BY `products`.`idProducts` DESC LIMIT $start_from, $limit")) {
                 $stmt->execute();
@@ -109,32 +116,32 @@
                             </div>
                         </div>
                     ';
-                } 
-            } 
+                }
+            }
             $stmt->close();
         }
             $conn = mysqli_connect($servername, $username, $password, $mydb);
             $sql = "SELECT COUNT(idProducts) FROM `products` where sold = 0";
 
-            $rs_result = mysqli_query($conn, $sql);  
-            $row = mysqli_fetch_row($rs_result);  
-            $total_records = $row[0];  
-            $total_pages = ceil($total_records / $limit);  
+            $rs_result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_row($rs_result);
+            $total_records = $row[0];
+            $total_pages = ceil($total_records / $limit);
                     echo('<nav aria-label="Page navigation" style="float: right;">
                             <ul class="pagination">');
-                    $pagLink = "";                       
-                    for ($i=1; $i<=$total_pages; $i++) { 
-                    if($i==$page)  
+                    $pagLink = "";
+                    for ($i=1; $i<=$total_pages; $i++) {
+                    if($i==$page)
                         $pagLink .= "<li class='active'>
                                         <a href='index.php?page= ".$i."'>".$i."</a>
-                                    </li>"; 
+                                    </li>";
                     else
                         $pagLink .= "<li>
                                         <a href='index.php?page=".$i."'>".$i."</a>
-                                    </li>";   
-                    };   
+                                    </li>";
+                    };
                     echo $pagLink . '</ul>
-                            </nav>';                    
+                            </nav>';
 >>>>>>> ee066e985e809852d0d3f2caf05eeb48163d06db
         $mysqli->close();
 
