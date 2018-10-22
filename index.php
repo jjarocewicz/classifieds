@@ -66,25 +66,25 @@
                         $_SESSION["category"] = $category;
                         $_SESSION["price"] = $price;
                         $_SESSION["sold"] = $sold;
-                          <div class="media">
-                            <div class="media-left">
+                        echo '<div class="media">
+                            <div class="media-left">';
                             if ($image != NULL){
                                 echo '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" height="100" width="100" class="img-thumbnail" />';
                             } else {
                                 echo '<img src="images/No_Image_Available.png" height="100" width="100" class="img-thumbnail" />';
                             }
-                          </div>
+                            //$query = mysqli_query($mysqli, "SELECT * FROM products WHERE idProducts='$id'");
+                        echo '</div>
                             <div class="media-body">
-                              <h4 class="media-heading">
-                              //$query = mysqli_query($mysqli, "SELECT * FROM products WHERE idProducts='$id'");
-                              "<a href='buy.php?idProducts=" . $row['idProducts'] . $row['title'] "</a>"
+                              <h4 class="media-heading">                              
+                              <a href="buy.php?idProducts="' . $row["idProducts"] . $row["title"] . '"</a>
                               </h4>
                                 <p>' . $description . '</p>
                                 <em>' . $category . '</em>
                                 <br />
                                 <p>$' . $price . '.00</p>
                             </div>
-                        </div>
+                        </div>';
                 }
             }
             $stmt->close();
