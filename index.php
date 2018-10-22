@@ -41,6 +41,7 @@
         if (mysqli_connect_error()) {
             printf("Connection to the database failed, please try again: " . mysqli_connect_error());
             exit();
+<<<<<<< HEAD
 //<<<<<<< HEAD
         }
 
@@ -84,6 +85,10 @@
 =======
         }
 
+=======
+        } 
+        
+>>>>>>> 618963a55f67afbf6cc4fee6733be8dc0be3d2b7
         // set page limit and page number
         $limit = 5;
         if (isset($_GET["page"])) {
@@ -141,11 +146,16 @@
                                     </li>";
                     };
                     echo $pagLink . '</ul>
+<<<<<<< HEAD
                             </nav>';
 >>>>>>> ee066e985e809852d0d3f2caf05eeb48163d06db
+=======
+                            </nav>';                    
+>>>>>>> 618963a55f67afbf6cc4fee6733be8dc0be3d2b7
         $mysqli->close();
 
+
+?>
     </div>
 </body>
 </html>
-?>
