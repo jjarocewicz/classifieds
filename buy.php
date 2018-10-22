@@ -16,29 +16,24 @@
     <h3>Baker Classifieds - Buy Item</h3>
 
     <?php
-
         $servername = "localhost"; //"108.179.220.92";
         $username = "root"; //"dbljtwon_root";
         $password = ""; //"j6T2&^7eR7";
         $mydb = "dbljtwon_php";
-
         $mysqli = mysqli_connect($servername, $username, $password, $mydb);
-
         if ($mysqli->connect_error) {
           die("Database connection failed: " . $dbconnect->connect_error);
         }
-
         if(isset($_GET['idProducts']))
         {
           $item_id = $_GET['idProducts'];
-
           $query = mysqli_query($mysqli, "SELECT * FROM products WHERE idProducts=$item_id");
           if(mysqli_num_rows($query) !=0)
           {
             while($row = mysqli_fetch_array($query))
             {
               <p>Title: <?php echo $_GET["title"]; ?></p>
-              <span>Item: <?php echo $_GET["idProducts"]; ?></span><br>
+              <span>Item: <?php echo ["idProducts"]; ?></span><br>
               <span>Description: <?php echo $_GET["description"]; ?></span><br>
               <br>
               <span><?php echo $_GET["image"]; ?></span><br>
