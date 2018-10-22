@@ -14,7 +14,7 @@
 <?php
     include "nav.php";
     ob_start();
-    session_start();
+    //session_start();
 ?>
 <div class="container">
     <div class="row">
@@ -42,7 +42,7 @@
         }
 
        // $query = mysqli_query($mysqli, "SELECT * FROM products WHERE idProducts='$id' ");
-       
+
 
 
         // set page limit and page number
@@ -66,28 +66,29 @@
                         $_SESSION["category"] = $category;
                         $_SESSION["price"] = $price;
                         $_SESSION["sold"] = $sold;
-                        echo '<div class="media">
-                            <div class="media-left">';
+                          <div class="media">
+                            <div class="media-left">
                             if ($image != NULL){
                                 echo '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" height="100" width="100" class="img-thumbnail" />';
                             } else {
                                 echo '<img src="images/No_Image_Available.png" height="100" width="100" class="img-thumbnail" />';
                             }
-                            echo '</div>
+                          </div>
                             <div class="media-body">
-                              <h4 class="media-heading">';
+                              <h4 class="media-heading">
                               //$query = mysqli_query($mysqli, "SELECT * FROM products WHERE idProducts='$id'");
-                            echo '</h4>
+                              "<a href='buy.php?idProducts=" . $row['idProducts'] . $row['title'] "</a>"
+                              </h4>
                                 <p>' . $description . '</p>
                                 <em>' . $category . '</em>
                                 <br />
                                 <p>$' . $price . '.00</p>
                             </div>
-                        </div>';
+                        </div>
                 }
             }
             $stmt->close();
-          }    
+          }
 
     // set page limit and page number
     // $limit = 5;
